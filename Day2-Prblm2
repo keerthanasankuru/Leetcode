@@ -1,0 +1,37 @@
+# Day 2 - LeetCode Practice
+# Problem: Combination Sum (LeetCode 39)
+# Link: https://leetcode.com/problems/combination-sum/
+
+# Approach:
+# - Use backtracking to explore all combinations
+# - At each step, choose the same element again (reuse allowed)
+# - Stop recursion if sum > target
+# - Add path to result when sum == target
+
+# Time Complexity: O(2^n) (approx)
+# Space Complexity: O(k) (recursion stack)
+
+# Key Concepts:
+# - Backtracking
+# - Recursion
+# - Choose → Explore → Undo pattern
+
+from typing import List
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        n = len(candidates)
+        ans = []
+
+        def fun(i,path,summ):
+            if summ==target:
+                ans.append(path.copy())
+                return
+            if i == len(candidates) or summ > target:
+                return
+            path.append(candidates[i])      
+            fun(i,path,summ+candidates[i])
+            path.pop()
+            fun(i+1,path,summ)    
+        fun(0,[],0)
+        return ans
