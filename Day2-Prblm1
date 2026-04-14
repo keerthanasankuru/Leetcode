@@ -1,0 +1,49 @@
+# Day 2 - LeetCode Practice
+# Problem: Combination Sum II (LeetCode 40)
+# Link: https://leetcode.com/problems/combination-sum-ii/
+
+# Approach:
+# - Sort array to handle duplicates
+# - Use backtracking to generate combinations
+# - Skip duplicates using:
+#   if i > index and candidates[i] == candidates[i-1]
+# - Stop recursion if sum > target
+# - Add path when sum == target
+
+# Time Complexity: O(2^n) (approx)
+# Space Complexity: O(k)
+
+# Key Concepts:
+# - Backtracking
+# - Duplicate handling
+# - Sorting
+
+from typing import List
+
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        candidates.sort()
+        ans = []
+        n = len(candidates)
+
+        def backtrack(index, path, summ):
+            if summ == target:
+                ans.append(path.copy())
+                return
+            
+            if summ > target:
+                return
+
+            for i in range(index, n):
+                
+                
+                if i > index and candidates[i] == candidates[i-1]:
+                    continue
+                
+                
+                path.append(candidates[i])
+                backtrack(i + 1, path, summ + candidates[i])
+                path.pop()
+
+        backtrack(0, [], 0)
+        return ans
