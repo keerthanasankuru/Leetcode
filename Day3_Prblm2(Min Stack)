@@ -1,0 +1,62 @@
+# Day 3 - LeetCode Practice
+# Problem: Min Stack (LeetCode 155)
+# Link: https://leetcode.com/problems/min-stack/
+
+# Approach:
+# - Maintain stack to store values
+# - Track minimum element while pushing
+# - Ensure all operations work in O(1)
+
+# Time Complexity: O(1)
+# Space Complexity: O(n)
+
+# Key Concepts:
+# - Stack
+# - Design problem
+# - Constant time operations
+
+class MinStack:
+
+    def __init__(self):
+        self.stk=[]
+        self.minn=-1
+        
+
+    def push(self, val: int) -> None:
+        if len(self.stk)==0:
+            self.stk.append(val)
+            self.minn=val
+        elif val<self.minn:
+            self.stk.append(2*val-self.minn)
+            self.minn=val
+        else:
+            self.stk.append(val)             
+
+    def pop(self) -> None:
+        if len(self.stk)==0:
+            return
+        x=self.stk.pop()
+        if x<self.minn:
+            self.minn=2*self.minn-x    
+
+    def top(self) -> int:
+        if len(self.stk)==0:
+            return
+        x = self.stk[-1]
+        if x < self.minn:
+            return self.minn
+        return x
+
+    def getMin(self) -> int:
+        if len(self.stk)==0:
+            return -1
+        return self.minn    
+        
+
+
+# Your MinStack object will be instantiated and called as such:
+# obj = MinStack()
+# obj.push(val)
+# obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.getMin()
