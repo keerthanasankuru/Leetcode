@@ -1,0 +1,39 @@
+# Day 3 - LeetCode Practice
+# Problem: Valid Parentheses (LeetCode 20)
+# Link: https://leetcode.com/problems/valid-parentheses/
+
+# Approach:
+# - Use a stack to store opening brackets
+# - For every closing bracket, check if it matches top of stack
+# - If mismatch or stack empty → invalid
+# - At the end, stack should be empty
+
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
+# Key Concepts:
+# - Stack
+# - HashMap (dictionary)
+# - String traversal
+class Solution:
+    def isValid(self, s: str) -> bool:
+        d={'[':']',
+        '{':'}',
+        '(':')'}
+        stk=[]
+        open=['[','{','(']
+        close=['}',']',')']
+        for char in s:
+            if char in open:
+                stk.append(char)
+            else:
+                if len(stk)!=0:
+                    val=stk.pop()
+                    if d[val]!=char:
+                        return False
+                else:
+                    return False        
+        return len(stk)==0  
+
+
+        
