@@ -1,0 +1,40 @@
+# Day 4 - LeetCode Practice
+# Problem: Letter Combinations of a Phone Number (LeetCode 17)
+# Link: https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+
+# Approach:
+# - Use backtracking to generate all possible letter combinations
+# - Map digits to characters using dictionary
+# - For each digit, try all possible characters
+# - Build combinations step by step
+
+# Time Complexity: O(4^n)
+# Space Complexity: O(n)
+
+# Key Concepts:
+# - Backtracking
+# - HashMap (digit → letters)
+# - String building
+
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        mapp={'2':'abc',
+               '3':'def',
+               '4':'ghi',
+               '5':'jkl',
+               '6':'mno',
+               '7':'pqrs',
+               '8':'tuv',
+               '9':'wxyz'}
+        ans=[]
+        def fun(idx,path):
+            if len(path)==len(digits):
+                ans.append(path)
+                return
+            for char in mapp[digits[idx]]:
+                
+                fun(idx+1,path+char)
+                
+        fun(0,'')
+        return ans        
+
