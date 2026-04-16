@@ -1,0 +1,38 @@
+# Day 4 - LeetCode Practice
+# Problem: Combination Sum III (LeetCode 216)
+# Link: https://leetcode.com/problems/combination-sum-iii/
+
+# Approach:
+# - Use backtracking to generate combinations from numbers 1 to 9
+# - Choose numbers such that length == k and sum == n
+# - Stop recursion if sum > n or path length > k
+# - Each number used only once
+
+# Time Complexity: O(2^n) (approx)
+# Space Complexity: O(k)
+
+# Key Concepts:
+# - Backtracking
+# - Constraints handling
+# - Pruning recursion
+
+
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        ans=[]
+        nums=[i for i in range(1,10)]
+        
+        def fun(idx,summ,path):
+            if len(path)==k and summ==n:
+                ans.append(path.copy())
+                return
+            if summ > n or len(path) > k:
+                return
+            if idx == len(nums):
+                return        
+            path.append(nums[idx])
+            fun(idx+1,summ+nums[idx],path)    
+            path.pop()
+            fun(idx+1,summ,path)
+        fun(0,0,[])
+        return ans    
