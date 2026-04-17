@@ -1,0 +1,41 @@
+# Day 5 - LeetCode Practice
+# Problem: Asteroid Collision (LeetCode 735)
+# Link: https://leetcode.com/problems/asteroid-collision/
+
+# Approach:
+# - Use a stack to simulate collisions
+# - If current asteroid is moving left and stack top is moving right → collision
+# - Compare sizes:
+#   - Smaller explodes
+#   - Equal both explode
+# - Continue until no collision possible
+
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
+# Key Concepts:
+# - Stack
+# - Simulation
+# - While loop conditions
+  class Solution:
+    def asteroidCollision(self, asteroids):
+        stk = []
+        
+        for num in asteroids:
+            
+            while stk and num < 0 and stk[-1] > 0:
+                
+                if stk[-1] < -num:
+                    stk.pop()  
+                    continue
+                
+                elif stk[-1] == -num:
+                    stk.pop()   
+                    break
+                
+                else:
+                    break      
+            else:
+                stk.append(num)
+        
+        return stk
