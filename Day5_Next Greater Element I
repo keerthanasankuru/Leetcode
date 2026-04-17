@@ -1,0 +1,40 @@
+# Day 5 - LeetCode Practice
+# Problem: Next Greater Element I (LeetCode 496)
+# Link: https://leetcode.com/problems/next-greater-element-i/
+
+# Approach:
+# - Use a monotonic decreasing stack
+# - Traverse from right to left
+# - Pop smaller elements
+# - Top of stack gives next greater element
+
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
+# Key Concepts:
+# - Monotonic Stack
+# - HashMap (value → next greater)
+# - Reverse traversal
+class Solution:
+    def nextGreaterElement(self, nums1, nums2):
+        res = {}
+        stk = []
+
+
+        for i in range(len(nums2)-1, -1, -1):
+            
+            while stk and stk[-1] <= nums2[i]:
+                stk.pop()
+            
+            if not stk:
+                res[nums2[i]] = -1
+            else:
+                res[nums2[i]] = stk[-1]
+            
+            stk.append(nums2[i])
+        
+        ans = []
+        for num in nums1:
+            ans.append(res[num])
+        
+        return ans
