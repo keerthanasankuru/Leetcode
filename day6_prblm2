@@ -1,0 +1,31 @@
+# Day 6 - LeetCode Practice
+# Problem: Linked List Cycle II (LeetCode 142)
+# Link: https://leetcode.com/problems/linked-list-cycle-ii/
+
+# Approach:
+# - Use Floyd’s Cycle Detection (slow & fast pointers)
+# - When they meet, move one pointer to head
+# - Move both one step → meeting point is cycle start
+
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+
+# Key Concepts:
+# - Two pointers
+# - Cycle detection
+class Solution:
+    def detectCycle(self, head):
+        slow = fast = head
+        
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            
+            if slow==fast:
+                slow=head
+                while slow!=fast:
+                    slow=slow.next
+                    fast=fast.next
+                    
+                return slow
+        return None            
