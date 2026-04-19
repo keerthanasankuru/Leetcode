@@ -1,0 +1,51 @@
+# Day 7 - LeetCode Practice
+# Problem: Remove Nth Node From End of List (LeetCode 19)
+# Link: https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+
+# Approach:
+# - Use two pointers (fast & slow)
+# - Move fast pointer n steps ahead
+# - Move both until fast reaches end
+# - Slow will be just before the node to delete
+
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+
+# Key Concepts:
+# - Two pointers
+# - Linked list traversal
+# - Edge case handling (removing head)
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        prev = None
+        temp = head
+
+        cnt = 0
+        while temp:
+            cnt += 1
+            temp = temp.next
+
+        if cnt == 0:
+            return None
+
+        temp = head
+
+        while temp:
+            if cnt == n:
+                break
+            prev = temp
+            temp = temp.next
+            cnt -= 1
+
+        if prev is None:
+            return head.next  
+        else:
+            prev.next = temp.next
+
+        return head
