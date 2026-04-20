@@ -1,0 +1,36 @@
+# Day 8 - LeetCode Practice
+# Problem: Search Insert Position (LeetCode 35)
+
+# Approach:
+# - Apply binary search
+# - If not found, return correct insert position
+
+# Time Complexity: O(log n)
+# Space Complexity: O(1)
+
+# Key Concepts:
+# - Lower bound concept
+
+  class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        low=0
+        high=len(nums)-1
+        while low<=high:
+            mid=(low+high)//2
+            if nums[mid]==target:
+                return mid
+            elif nums[mid]<target:
+                
+                low=mid+1
+            else:
+                high=mid-1
+                
+        if nums[mid]<target:
+            return mid+1
+        else:
+            return mid             
+        
+
+
+
+        
