@@ -1,0 +1,36 @@
+
+# Day 8 - LeetCode Practice
+# Problem: Search in Rotated Sorted Array (LeetCode 33)
+
+# Approach:
+# - Identify sorted half (left or right)
+# - Check if target lies in sorted part
+# - Adjust search space accordingly
+
+# Time Complexity: O(log n)
+# Space Complexity: O(1)
+
+# Key Concepts:
+# - Binary search on rotated arrays
+# - Conditional logic
+
+  class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        low, high = 0, len(nums) - 1
+
+        while low <= high:
+            mid = (low + high) // 2
+            if nums[mid] == target:
+                return mid
+            if nums[low] <= nums[mid]:
+                if nums[low] <= target < nums[mid]:
+                    high = mid - 1
+                else:
+                    low = mid + 1
+            else:
+                if nums[mid] < target <= nums[high]:
+                    low = mid + 1
+                else:
+                    high = mid - 1
+
+        return -1
