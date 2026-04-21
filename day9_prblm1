@@ -1,0 +1,40 @@
+# Day 9 - Binary Search on Answer
+# Problem: Koko Eating Bananas (LeetCode 875)
+
+# Idea:
+# Search for minimum k (bananas/hour)
+# such that total hours <= h
+
+# Time Complexity: O(n log max(piles))
+# Space Complexity: O(1)
+
+# Key Concept:
+# Binary search on answer space
+  import math
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        low=1
+        high=max(piles)
+        ans=float('inf')
+        while low<=high:
+            mid=(low+high)//2
+            
+            th=self.total_hr(piles,mid)
+            if th<=h:
+                ans=mid
+                high=mid-1
+                
+            else:
+                low=mid+1
+        return ans
+
+    def total_hr(self,arr,n):
+        th=0
+        for b in arr:
+            th+=math.ceil(b/n)
+        return th    
+
+
+
+
+        
