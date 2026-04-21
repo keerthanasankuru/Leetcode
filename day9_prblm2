@@ -1,0 +1,37 @@
+# Day 9 - Binary Search on Answer
+# Problem: Smallest Divisor Given a Threshold (LeetCode 1283)
+
+# Idea:
+# Find smallest divisor such that:
+# sum(ceil(num/divisor)) <= threshold
+
+# Time Complexity: O(n log max(nums))
+# Space Complexity: O(1)
+
+# Key Concept:
+# Monotonic function + binary search
+  class Solution:
+    def smallestDivisor(self, nums: List[int], threshold: int) -> int:
+        low=1
+        high=max(nums)
+        res=float('inf')
+        while low<=high:
+            mid=(low+high)//2
+            summ=self.add(nums,mid)
+            if summ<=threshold:
+                high=mid-1
+                res=mid
+            else:
+                low=mid+1
+
+        return res
+
+
+    def add(self,nums,n):
+        summ=0
+        for num in nums:
+            summ+=math.ceil(num/n)
+        return summ
+
+
+        
