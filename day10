@@ -1,0 +1,38 @@
+# Day 10 - Trapping Rain Water (LeetCode 42)
+
+# Approach:
+# 1. Compute leftMax array
+# 2. Compute rightMax array
+# 3. Water at index i = min(leftMax[i], rightMax[i]) - height[i]
+
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
+# Key Insight:
+# Water trapped depends on the minimum of tallest bars on both sides
+
+class Solution:
+    def trap(self, height):
+        if len(height) < 2:
+            return 0
+
+        n = len(height)
+
+        leftMax = [0] * n
+        leftMax[0] = height[0]
+
+        for i in range(1, n):
+            leftMax[i] = max(height[i], leftMax[i-1])
+
+        rightMax = [0] * n
+        rightMax[n-1] = height[n-1]
+
+        for i in range(n-2, -1, -1):
+            rightMax[i] = max(height[i], rightMax[i+1])
+
+        totalWater = 0
+
+        for i in range(n):
+            totalWater += min(leftMax[i], rightMax[i]) - height[i]
+
+        return totalWater
