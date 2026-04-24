@@ -1,0 +1,43 @@
+# Day 12 - Sliding Window (Strings)
+
+# Problem:
+# 3. Longest Substring Without Repeating Characters
+
+# Approach:
+# Use sliding window with a set
+# Expand window → if duplicate → shrink from left
+
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
+class Solution:
+
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        seen = set()
+        left = 0
+        max_len = 0
+
+        for right in range(len(s)):
+
+            # Shrink window until no duplicate
+            while s[right] in seen:
+                seen.remove(s[left])
+                left += 1
+
+            seen.add(s[right])
+
+            # Update max length
+            max_len = max(max_len, right - left + 1)
+
+        return max_len
+
+
+# -------------------------------
+# Example Usage
+# -------------------------------
+if __name__ == "__main__":
+    sol = Solution()
+
+    print(sol.lengthOfLongestSubstring("abcabcbb"))  # 3
+    print(sol.lengthOfLongestSubstring("bbbbb"))     # 1
+    print(sol.lengthOfLongestSubstring("pwwkew"))    # 3
