@@ -1,0 +1,36 @@
+"""
+Problem: Diameter of Binary Tree
+
+Description:
+Given a binary tree, return the length of its diameter.
+The diameter is the longest path between any two nodes 
+in the tree (number of edges).
+
+Approach:
+- Use DFS to calculate height
+- At each node:
+    diameter = left_height + right_height
+- Track maximum diameter globally
+
+Time Complexity: O(n)
+Space Complexity: O(h)
+"""
+
+class Solution:
+    def diameterOfBinaryTree(self, root):
+        self.diameter = 0
+
+        def dfs(node):
+            if not node:
+                return 0
+            
+            left = dfs(node.left)
+            right = dfs(node.right)
+
+            # update diameter
+            self.diameter = max(self.diameter, left + right)
+
+            return 1 + max(left, right)
+
+        dfs(root)
+        return self.diameter
