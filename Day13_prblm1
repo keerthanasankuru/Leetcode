@@ -1,0 +1,23 @@
+"""
+Problem: Maximum Depth of Binary Tree
+
+Description:
+Given the root of a binary tree, return its maximum depth.
+The depth is the number of nodes along the longest path 
+from root to the farthest leaf node.
+
+Approach:
+- Use recursion (DFS)
+- For each node:
+    depth = 1 + max(left_depth, right_depth)
+
+Time Complexity: O(n)
+Space Complexity: O(h)  (height of tree)
+"""
+
+class Solution:
+    def maxDepth(self, root):
+        if not root:
+            return 0
+        
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
