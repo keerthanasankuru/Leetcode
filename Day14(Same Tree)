@@ -1,0 +1,31 @@
+"""
+Problem: Same Tree
+
+Description:
+Given two binary trees, check whether they are identical.
+Two trees are same if:
+- Structure is identical
+- Node values are same
+
+Approach:
+- Use recursion
+- Compare:
+    1. Both nodes None → True
+    2. One None → False
+    3. Values equal → check left & right
+
+Time Complexity: O(n)
+Space Complexity: O(h)
+"""
+
+class Solution:
+    def isSameTree(self, p, q):
+        if p is None and q is None:
+            return True
+        if p is None or q is None:
+            return False
+        if p.val != q.val:
+            return False
+        
+        return (self.isSameTree(p.left, q.left) and
+                self.isSameTree(p.right, q.right))
