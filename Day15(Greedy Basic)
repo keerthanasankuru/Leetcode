@@ -1,0 +1,106 @@
+"""
+Day 15 - Greedy Algorithms
+
+Problems Covered:
+1. Maximum Units on a Truck
+2. Non-overlapping Intervals
+3. Job Sequencing Problem
+4. Fractional Knapsack
+
+Core Idea:
+Greedy = Make the best local choice to achieve global optimum
+
+Time Complexity:
+Mostly O(n log n) due to sorting
+"""
+
+# ---------------------------------------------------
+# 1. Maximum Units on a Truck
+# ---------------------------------------------------
+class MaximumUnits:
+    def maximumUnits(self, boxTypes, truckSize):
+        # Sort by units per box (descending)
+        boxTypes.sort(key=lambda x: x[1], reverse=True)
+
+        ans = 0
+
+        for boxes, units in boxTypes:
+            if truckSize >= boxes:
+                ans += boxes * units
+                truckSize -= boxes
+            else:
+                ans += truckSize * units
+                break
+
+        return ans
+
+
+# ---------------------------------------------------
+# 2. Non-overlapping Intervals
+# ---------------------------------------------------
+class NonOverlappingIntervals:
+    def eraseOverlapIntervals(self, intervals):
+        # Sort by end time
+        intervals.sort(key=lambda x: x[1])
+
+        prev_end = intervals[0][1]
+        remove = 0
+
+        for i in range(1, len(intervals)):
+            if intervals[i][0] < prev_end:
+                remove += 1
+            else:
+                prev_end = intervals[i][1]
+
+        return remove
+
+
+# ---------------------------------------------------
+# 3. Job Sequencing Problem
+# ---------------------------------------------------
+class JobSequencing:
+    def jobSequencing(self, deadline, profit):
+        jobs = list(zip(profit, deadline))
+
+        # Sort by profit (descending)
+        jobs.sort(reverse=True)
+
+        max_deadline = max(deadline)
+        slots = [-1] * (max_deadline + 1)
+
+        count = 0
+        total_profit = 0
+
+        for p, d in jobs:
+            # Place job in latest possible slot
+            for j in range(d, 0, -1):
+                if slots[j] == -1:
+                    slots[j] = 1
+                    count += 1
+                    total_profit += p
+                    break
+
+        return [count, total_profit]
+
+
+# ---------------------------------------------------
+# 4. Fractional Knapsack
+# ---------------------------------------------------
+class FractionalKnapsack:
+    def fractionalKnapsack(self, val, wt, capacity):
+        items = list(zip(val, wt))
+
+        # Sort by value/weight ratio
+        items.sort(key=lambda x: x[0] / x[1], reverse=True)
+
+        total = 0
+
+        for v, w in items:
+            if capacity >= w:
+                total += v
+                capacity -= w
+            else:
+                total += (v / w) * capacity
+                break
+
+        return total
