@@ -1,0 +1,33 @@
+"""
+Day 16 - Sliding Window
+
+Problem:
+Smallest Window Containing 0, 1 and 2
+
+Approach:
+- Use two pointers (i, j)
+- Expand window with j
+- Shrink window with i when condition satisfied
+- Maintain frequency map
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+"""
+
+class Solution:
+    def smallestSubstring(self, s):
+        freq = {"0": 0, "1": 0, "2": 0}
+        
+        i = 0
+        ans = float("inf")
+
+        for j in range(len(s)):
+            freq[s[j]] += 1
+
+            # Shrink window when valid
+            while freq["0"] > 0 and freq["1"] > 0 and freq["2"] > 0:
+                ans = min(ans, j - i + 1)
+                freq[s[i]] -= 1
+                i += 1
+
+        return ans if ans != float("inf") else -1
