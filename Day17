@@ -1,0 +1,44 @@
+"""
+Day 17 - Array Optimization Algorithms
+
+Problems:
+1. Moore's Voting Algorithm (Majority Element)
+2. Kadane’s Algorithm (Maximum Subarray Sum)
+
+Core Idea:
+Track optimal state in one pass
+"""
+
+# ---------------------------------------------------
+# 1. Moore's Voting Algorithm
+# ---------------------------------------------------
+class MooresVoting:
+    def majorityElement(self, nums):
+        candidate = None
+        count = 0
+
+        for num in nums:
+            if count == 0:
+                candidate = num
+            
+            if num == candidate:
+                count += 1
+            else:
+                count -= 1
+
+        return candidate
+
+
+# ---------------------------------------------------
+# 2. Kadane's Algorithm
+# ---------------------------------------------------
+class Kadane:
+    def maxSubArray(self, nums):
+        curr_sum = nums[0]
+        max_sum = nums[0]
+
+        for i in range(1, len(nums)):
+            curr_sum = max(nums[i], curr_sum + nums[i])
+            max_sum = max(max_sum, curr_sum)
+
+        return max_sum
