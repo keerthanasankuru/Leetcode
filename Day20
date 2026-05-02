@@ -1,0 +1,29 @@
+"""
+Day 20 - Longest Substring Without Repeating Characters
+
+Pattern:
+Sliding Window + HashSet
+
+Idea:
+- Maintain a window with unique characters
+- Expand when no duplicate
+- Shrink when duplicate found
+"""
+
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        vis = set()
+        i = 0
+        j = 0
+        maxx = 0
+
+        while j < len(s):
+            if s[j] not in vis:
+                vis.add(s[j])
+                maxx = max(maxx, j - i + 1)
+                j += 1
+            else:
+                vis.remove(s[i])
+                i += 1
+
+        return maxx
