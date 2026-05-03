@@ -1,0 +1,35 @@
+"""
+Day 21 - Sum of Primes Between Number and Its Reverse
+
+Pattern:
+Number manipulation + Prime checking
+
+Idea:
+- Reverse the number
+- Get range [min, max]
+- Check primes using sqrt optimization
+"""
+
+class Solution:
+    def sumOfPrimesInRange(self, n: int) -> int:
+        rev_n = int(str(n)[::-1])
+
+        low = min(n, rev_n)
+        high = max(n, rev_n)
+
+        ans = 0
+        for num in range(low, high + 1):
+            if self.is_prime(num):
+                ans += num
+
+        return ans
+
+    def is_prime(self, n):
+        if n < 2:
+            return False
+
+        for i in range(2, int(n ** 0.5) + 1):
+            if n % i == 0:
+                return False
+
+        return True
