@@ -1,0 +1,69 @@
+"""
+Day 23 - Sliding Window (At Most K Trick)
+
+Problems:
+1. Binary Subarrays With Sum
+2. Count Number of Nice Subarrays
+
+Core Idea:
+exact(k) = atMost(k) - atMost(k-1)
+"""
+
+# ----------------------------------------
+# 1. Binary Subarrays With Sum
+# ----------------------------------------
+
+class BinarySubarrays:
+    def numSubarraysWithSum(self, nums, goal):
+        
+        def atMost(k):
+            if k < 0:
+                return 0
+            
+            i = 0
+            total = 0
+            ans = 0
+            
+            for j in range(len(nums)):
+                total += nums[j]
+                
+                while total > k:
+                    total -= nums[i]
+                    i += 1
+                
+                ans += j - i + 1
+            
+            return ans
+        
+        return atMost(goal) - atMost(goal - 1)
+
+
+# ----------------------------------------
+# 2. Count Number of Nice Subarrays
+# ----------------------------------------
+
+class NiceSubarrays:
+    def numberOfSubarrays(self, nums, k):
+        
+        def atMost(k):
+            if k < 0:
+                return 0
+            
+            i = 0
+            count_odds = 0
+            ans = 0
+            
+            for j in range(len(nums)):
+                if nums[j] % 2 == 1:
+                    count_odds += 1
+                
+                while count_odds > k:
+                    if nums[i] % 2 == 1:
+                        count_odds -= 1
+                    i += 1
+                
+                ans += j - i + 1
+            
+            return ans
+        
+        return atMost(k) - atMost(k - 1)
