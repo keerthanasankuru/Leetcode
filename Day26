@@ -1,0 +1,61 @@
+"""
+Day 26 - Array Practice
+
+Problems:
+1. Push Zeroes to End
+2. Rotate Array by K
+3. Find Equilibrium Index
+"""
+
+# ----------------------------------------
+# 1. Push Zeroes to End
+# ----------------------------------------
+
+class MoveZeroes:
+    def moveZeroes(self, nums):
+        
+        j = 0
+        
+        for i in range(len(nums)):
+            
+            if nums[i] != 0:
+                nums[i], nums[j] = nums[j], nums[i]
+                j += 1
+        
+        return nums
+
+
+# ----------------------------------------
+# 2. Rotate Array by K
+# ----------------------------------------
+
+class RotateArray:
+    def rotate(self, nums, k):
+        
+        k = k % len(nums)
+
+        nums[:] = nums[-k:] + nums[:-k]
+
+        return nums
+
+
+# ----------------------------------------
+# 3. Find Equilibrium Index
+# ----------------------------------------
+
+class EquilibriumIndex:
+    def findEquilibrium(self, arr):
+        
+        total = sum(arr)
+        left_sum = 0
+
+        for i in range(len(arr)):
+            
+            total -= arr[i]
+
+            if left_sum == total:
+                return i
+
+            left_sum += arr[i]
+
+        return -1
