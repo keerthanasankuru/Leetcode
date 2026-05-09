@@ -1,0 +1,74 @@
+"""
+Day 26 - Array Basics
+
+Problems:
+1. Count Frequency of Elements
+2. Second Smallest & Largest
+3. All Non-Repeating Elements
+"""
+
+# ----------------------------------------
+# 1. Count Frequency of Elements
+# ----------------------------------------
+
+def count_frequency(arr):
+
+    freq = {}
+
+    for num in arr:
+        freq[num] = freq.get(num, 0) + 1
+
+    return freq
+
+
+# ----------------------------------------
+# 2. Second Smallest & Largest
+# ----------------------------------------
+
+def second_smallest_largest(arr):
+
+    smallest = float("inf")
+    second_smallest = float("inf")
+
+    largest = float("-inf")
+    second_largest = float("-inf")
+
+    for num in arr:
+
+        # smallest
+        if num < smallest:
+            second_smallest = smallest
+            smallest = num
+
+        elif num < second_smallest and num != smallest:
+            second_smallest = num
+
+        # largest
+        if num > largest:
+            second_largest = largest
+            largest = num
+
+        elif num > second_largest and num != largest:
+            second_largest = num
+
+    return second_smallest, second_largest
+
+
+# ----------------------------------------
+# 3. All Non-Repeating Elements
+# ----------------------------------------
+
+def non_repeating(arr):
+
+    freq = {}
+
+    for num in arr:
+        freq[num] = freq.get(num, 0) + 1
+
+    ans = []
+
+    for num in arr:
+        if freq[num] == 1:
+            ans.append(num)
+
+    return ans
