@@ -1,0 +1,120 @@
+"""
+Day 27 - BFS Grid Problems
+
+Problems Solved:
+1. Flood Fill
+2. Rotting Oranges
+
+Concepts:
+- BFS Traversal
+- Multi-source BFS
+- Grid Traversal
+- Queue
+- Visited Set
+"""
+
+from collections import deque
+
+
+# -----------------------------------
+# 1. Flood Fill
+# -----------------------------------
+
+class Solution:
+    def floodFill(self, image, sr, sc, color):
+
+        visited = set()
+        queue = deque()
+
+        m = len(image)
+        n = len(image[0])
+
+        x = [-1, 1, 0, 0]
+        y = [0, 0, -1, 1]
+
+        old = image[sr][sc]
+
+        image[sr][sc] = color
+        queue.append((sr, sc))
+
+        while queue:
+
+            a, b = queue.popleft()
+
+            for i in range(4):
+
+                ni = a + x[i]
+                nj = b + y[i]
+
+                if (
+                    0 <= ni < m
+                    and 0 <= nj < n
+                    and image[ni][nj] == old
+                    and (ni, nj) not in visited
+                ):
+
+                    image[ni][nj] = color
+                    queue.append((ni, nj))
+                    visited.add((ni, nj))
+
+        return image
+
+
+# -----------------------------------
+# 2. Rotting Oranges
+# -----------------------------------
+
+class Solution:
+    def orangesRotting(self, grid):
+
+        visited = set()
+        queue = deque()
+
+        m = len(grid)
+        n = len(grid[0])
+
+        fresh = 0
+        ans = 0
+
+        for i in range(m):
+            for j in range(n):
+
+                if grid[i][j] == 2:
+                    queue.append((i, j))
+
+                elif grid[i][j] == 1:
+                    fresh += 1
+
+        x = [-1, 1, 0, 0]
+        y = [0, 0, -1, 1]
+
+        while queue and fresh > 0:
+
+            for _ in range(len(queue)):
+
+                a, b = queue.popleft()
+
+                for i in range(4):
+
+                    ni = a + x[i]
+                    nj = b + y[i]
+
+                    if (
+                        0 <= ni < m
+                        and 0 <= nj < n
+                        and grid[ni][nj] == 1
+                        and (ni, nj) not in visited
+                    ):
+
+                        visited.add((ni, nj))
+                        queue.append((ni, nj))
+
+                        grid[ni][nj] = 2
+                        fresh -= 1
+
+            ans += 1
+
+        if fresh == 0:
+            return ans
+
+        return -1
