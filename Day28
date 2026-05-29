@@ -1,0 +1,45 @@
+Day 28 – Graph Cycle Detection
+Problems Solved
+Detect Cycle in Undirected Graph (DFS)
+Detect Cycle in Directed Graph (DFS + Path Tracking)
+Key Concepts
+Graph Traversal
+Depth First Search (DFS)
+Parent Node Tracking
+Recursion Stack / Path Set
+Cycle Detection
+Learning Summary
+Undirected Graph
+
+Cycle exists when:
+
+A neighbour is already visited
+The neighbour is not the parent node
+
+Used:
+
+DFS
+Parent Tracking
+
+Time Complexity: O(V + E)
+
+Directed Graph
+
+Cycle exists when:
+
+During DFS, a neighbour is found in the current recursion path
+
+Used:
+
+DFS
+Visited Set
+Path Set (Recursion Stack)
+
+Time Complexity: O(V + E)
+
+Biggest Takeaway
+
+Although both problems are about cycle detection, the logic differs significantly:
+
+Undirected Graph → Parent Check
+Directed Graph → Recursion Path Check
