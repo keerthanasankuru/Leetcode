@@ -1,0 +1,24 @@
+Day 29 – Topological Sort (DFS)
+Problem Solved
+Topological Sort (GFG)
+Concepts Used
+Directed Acyclic Graph (DAG)
+DFS Traversal
+Stack
+Dependency Ordering
+Graph Traversal
+Approach
+Build adjacency list.
+Perform DFS from every unvisited node.
+Visit all neighbours first.
+Push current node into stack after DFS completes.
+Reverse the stack to get Topological Ordering.
+Key Insight
+
+Nodes are added to the stack only after all their dependencies have been processed.
+
+This guarantees that every prerequisite appears before the dependent node in the final ordering.
+
+Complexity
+Time: O(V + E)
+Space: O(V)
