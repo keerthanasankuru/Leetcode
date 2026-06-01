@@ -1,0 +1,25 @@
+Day 30 – Surrounded Regions
+Problem Solved
+Surrounded Regions (LeetCode 130)
+Concepts Used
+BFS
+Grid Traversal
+Boundary Traversal
+Connected Components
+Graph Representation of Matrix
+Approach
+Traverse all boundary cells.
+Start BFS from every boundary 'O'.
+Mark all reachable 'O' cells as safe.
+Traverse the grid again.
+Convert every unvisited 'O' to 'X'.
+Key Insight
+
+Instead of finding surrounded regions directly:
+
+Find boundary-connected regions.
+Mark them as safe.
+Capture everything else.
+Complexity
+Time: O(m × n)
+Space: O(m × n)
