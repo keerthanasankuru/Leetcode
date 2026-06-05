@@ -1,0 +1,30 @@
+Day 31 – Number of Enclaves
+Problem Solved
+Number of Enclaves (LeetCode 1020)
+Concepts Used
+BFS / DFS
+Grid Traversal
+Boundary Traversal
+Connected Components
+Graph Representation of Matrix
+Approach
+Traverse all boundary cells.
+Start BFS/DFS from every boundary land cell (1).
+Mark all reachable land cells as visited.
+Traverse the grid again.
+Count all unvisited land cells.
+Key Insight
+Instead of directly finding enclaves:
+Find all land cells connected to the boundary.
+Remove them from consideration.
+The remaining land cells are enclaves.
+Complexity
+Time: O(m × n)
+Space: O(m × n)
+Learning
+This problem reinforced an important grid pattern:
+Boundary Traversal + BFS/DFS
+The same idea appears in problems like:
+Surrounded Regions
+Number of Enclaves
+Closed Islands
